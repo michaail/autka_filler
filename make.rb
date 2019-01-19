@@ -10,9 +10,10 @@ class Make
     response.parsed_response
   end
 
-  def post_make(make)
-    res = HTTParty.post("#{@@base_uri}",
-                        body: { 'make': make})
+  def post_make(make, models)
+    HTTParty.post("#{@@base_uri}",
+      body: { 'make': make,
+      'models': models })
   end
 
   def build_make_arr
@@ -25,10 +26,9 @@ class Make
   def makes
     @@makes
   end
-
 end
 
-d = Make.new
-d.build_make_arr
-puts d.retrieve_makes
-puts d.makes
+# d = Make.new
+# d.build_make_arr
+# puts d.retrieve_makes
+# puts d.makes

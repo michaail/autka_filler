@@ -6,10 +6,10 @@ class Lots
   @pages = 0
 
   # get lots page from api
-  def get_lots (page)
+  def get_lots(page)
     res = HTTParty.get "#{@@baseURI}?page=#{page.to_s}"
-    @pages = res.parsed_response['meta']['pages_count']
-    res.parsed_response['documents']
+    @pages = JSON.parse(res.body)['meta']['pagesCount']
+    JSON.parse(res.body)['documents']
   end
 
   def makes_of_page (documents)
@@ -47,7 +47,7 @@ class Lots
 
 end
 
-lot = Lots.new
-lot.get_lots(1)
-lot.run
-puts lot.dict
+# lot = Lots.new
+# lot.get_lots(1)
+# lot.run
+# puts lot.dict
